@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1720047918 source:/home/ali/cpp_proj/Otto_Challenge_2/main.cpp
+	<iostream>
+	<boost/asio.hpp>
+	<boost/bind.hpp>
+	<thread>
+	<vector>
+	<array>
+	<ottoUtils.h>
+
+1720047551 /home/ali/cpp_proj/Otto_Challenge_2/include/ottoUtils.h
+	<vector>
+	<string>
+	<thread>
+	<boost/asio.hpp>
+
+1720047741 source:/home/ali/cpp_proj/Otto_Challenge_2/src/ottoUtils.cpp
+	"ottoUtils.h"
+	<chrono>
+	<iostream>
+
