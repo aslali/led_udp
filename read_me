@@ -1,0 +1,53 @@
+# Robot PC to LED Controller Communication System
+
+## Overview
+The system utilizes UDP for communication and is implemented in C++ with the Boost ASIO library for networking. The LED controller receives UDP packets from the robot_pc containing LED data, where each packet includes a header indicating its sequential order (chunk_index) and the total number of packets (total_chunks) expected for the complete data set. Upon reception, the controller parses these headers to ensure packets are processed in the correct order, preventing data misalignment. It then extracts and accumulates the LED data from each packet's payload, reconstructing the complete LED data stream.
+
+## Files Included
+- 'robot_pc.hpp': Header file defining the 'RobotPC' class.
+- 'robot_pc.cpp': Implementation file for the 'RobotPC' class.
+- 'robot.cpp': Main file for the 'robot_pc' application.
+- 'led.cpp': Main file for the LED controller ('led') application to test robot.cpp file
+
+## 'robot_pc.hpp' and 'robot_pc.cpp'
+These files define and implement the 'RobotPC' class, which manages UDP communication:
+- **Sending**: Splits and sends leds data to the LED controller ('led').
+- **Receiving**: Receives heartbeat and log messages from the led controller.
+
+## 'robot.cpp'
+The 'robot.cpp' file contains the main application for the 'robot_pc':
+- It instantiates an instance of the 'RobotPC' class, configuring it with appropriate IP addresses and ports to communicate with the LED controller ('led').
+- The 'RobotPC' instance sends LED data to the LED controller ('led') and receives messages from it.
+
+## 'led.cpp'
+The 'led.cpp' file is for the LED controller ('led'):
+- **Receive and Display**: Sets up an instance of the 'LedController' class to receive LED data from the 'robot_pc'.
+- **Send**: Periodically sends heartbeat and log messages back to the 'robot_pc'.
+
+## Building Instructions for Linux (tested on Ubuntu)
+### Prerequisites
+- C++ compiler with C++11 support (e.g., 'g++')
+- Boost C++ Libraries (specifically Boost ASIO)
+
+### Building
+1. In a terminal window, cd to the folder containing the files
+2. Build the project using the provided Makefile:
+	This compiles both 'robot.cpp' and 'led.cpp', generating executables 'robot' and 'led'.
+
+### Running the Applications
+#### Robot PC ('robot')
+To run the 'robot' application:
+1- In a terminal window, cd to the folder containing the files.
+2- ./robot
+3- in a separate terminal window: ./led
+
+This simulates an LED controller receiving LED data from the 'robot_pc' and sending back heartbeat and log messages.
+
+## Notes
+- Ensure ports ('robot_port', 'led_port') in both 'robot.cpp' and 'led.cpp' are not currently in use in your system.
+
+
+
+
+
+
